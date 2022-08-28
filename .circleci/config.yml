@@ -37,7 +37,6 @@ commands:
             sudo ./aws/install
 
  
- 
 
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
