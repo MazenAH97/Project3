@@ -45,6 +45,7 @@ commands:
             sudo npm install --global n
             sudo n 13.8.0            
 
+
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
     parameters:
