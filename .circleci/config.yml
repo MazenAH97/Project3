@@ -178,6 +178,12 @@ jobs:
             --stack-name udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7} \
             --parameter-overrides ID=${CIRCLE_WORKFLOW_ID:0:7} \
             --tags project=udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project/.circleci/ansible/inventory.txt
+      - destroy-environment:
+          id: "${CIRCLE_WORKFLOW_ID:0:7}"   
       - run:
           name: Ensure front-end infrastructure exist
           command: |
@@ -194,12 +200,7 @@ jobs:
             --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
             --output text >> ~/project/.circleci/ansible/inventory.txt
             cat ~/project/.circleci/ansible/inventory.txt
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - project/.circleci/ansible/inventory.txt
-      - destroy-environment:
-          id: "${CIRCLE_WORKFLOW_ID:0:7}"      
+  
 
    
 
