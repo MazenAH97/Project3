@@ -322,6 +322,7 @@ jobs:
       - revert-migrations:
           WorkflowId: "${CIRCLE_WORKFLOW_ID:0:7}"
 
+
   smoke-test:
     docker:
       - image: cimg/base:stable 
@@ -361,10 +362,6 @@ jobs:
           WorkflowId: "${CIRCLE_WORKFLOW_ID:0:7}"
 
 
-
-
-
-
   cloudfront-update:
     docker:
       - image: cimg/base:stable
@@ -378,7 +375,7 @@ jobs:
             aws cloudformation deploy \
               --template-file .circleci/files/cloudfront.yml \
               --stack-name InitialStack \
-              --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:7}" \
+              --parameter-overrides WorkflowID="udapeople-${CIRCLE_WORKFLOW_ID:0:7}" \
               --tags project=udapeople
       - destroy-environment:
           id: "${CIRCLE_WORKFLOW_ID:0:7}"
