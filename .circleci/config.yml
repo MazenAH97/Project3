@@ -381,7 +381,7 @@ jobs:
       - revert-migrations:
           WorkflowId: "${CIRCLE_WORKFLOW_ID:0:7}"
 
-	cleanup:
+  cleanup:
     docker:
       - image: cimg/base:stable
     steps:
@@ -395,7 +395,7 @@ jobs:
                 --query "StackSummaries[*].StackName" \
                 --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
             echo Stack names: "${STACKS[@]}"
-            export OldWorkflowID=$(curl --insecure https://kvdb.io/QpdWU75E5D9fNZgv9BKWSa{KVDB_BUCKET}/old_workflow_id)
+            export OldWorkflowID=$(curl --insecure https://kvdb.io/QpdWU75E5D9fNZgv9BKWSa/old_workflow_id)
             echo Old Workflow ID: $OldWorkflowID 
             if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
             then
